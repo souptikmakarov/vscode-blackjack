@@ -1,0 +1,71 @@
+{
+  "name": "vscode-blackjack",
+  "displayName": "Blackjack Game",
+  "description": "Play blackjack in VS Code sidebar",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/souptikmakarov/vscode-blackjack"
+  },
+  "keywords": ["game", "blackjack", "entertainment", "cards"],
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "blackjackView",
+          "name": "Blackjack",
+          "type": "webview",
+          "when": "true"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "blackjack.newGame",
+        "title": "New Game",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blackjack.hit",
+        "title": "Hit",
+        "icon": "$(add)"
+      },
+      {
+        "command": "blackjack.stand",
+        "title": "Stand",
+        "icon": "$(check)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "blackjack.newGame",
+          "when": "view == blackjackView",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "@types/node": "16.x",
+    "typescript": "^4.4.4"
+  }
+}
