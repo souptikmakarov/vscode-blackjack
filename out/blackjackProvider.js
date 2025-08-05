@@ -143,9 +143,18 @@ class BlackjackProvider {
     }
     updateView() {
         if (this._view) {
+            // Calculate visible dealer score (only first card if game not over)
+            let visibleDealerScore = this.gameState.dealerScore;
+            if (!this.gameState.gameOver && this.gameState.dealerCards.length > 1) {
+                // Only show the first card's value
+                visibleDealerScore = this.gameState.dealerCards[0].value;
+            }
+            else if (!this.gameState.gameOver && this.gameState.dealerCards.length === 1) {
+                visibleDealerScore = this.gameState.dealerCards[0].value;
+            }
             this._view.webview.postMessage({
                 type: 'updateGame',
-                gameState: this.gameState
+                gameState: Object.assign(Object.assign({}, this.gameState), { visibleDealerScore: visibleDealerScore })
             });
         }
     }
@@ -293,7 +302,9 @@ class BlackjackProvider {
         
         function updateGame(gameState) {
             document.getElementById('player-score').textContent = gameState.playerScore;
-            document.getElementById('dealer-score').textContent = gameState.dealerScore;
+            // Show only visible dealer score when game is ongoing
+            const dealerScoreToShow = gameState.gameOver ? gameState.dealerScore : gameState.visibleDealerScore;
+            document.getElementById('dealer-score').textContent = dealerScoreToShow;
             document.getElementById('player-wins').textContent = gameState.playerWins;
             document.getElementById('dealer-wins').textContent = gameState.dealerWins;
             document.getElementById('message').textContent = gameState.message;

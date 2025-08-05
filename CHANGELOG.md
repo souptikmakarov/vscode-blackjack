@@ -5,3 +5,7 @@
 - Full blackjack gameplay
 - Sidebar integration
 - Win tracking
+
+## [1.0.1] - 2025-08-05
+- Fix bug where dealers total is shown even when one card is hidden.
+- Add publisher name correctly

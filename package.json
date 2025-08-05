@@ -2,7 +2,7 @@
   "name": "vscode-blackjack",
   "displayName": "Blackjack Game",
   "description": "Play blackjack in VS Code sidebar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "SouptikBanerjee",
   "author": "Souptik Banerjee",
   "license": "MIT",
